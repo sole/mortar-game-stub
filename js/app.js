@@ -1,19 +1,6 @@
 
 window.onload = function() {
 
-    // A cross-browser requestAnimationFrame
-    // See https://hacks.mozilla.org/2011/08/animating-with-javascript-from-setinterval-to-requestanimationframe/
-    var requestAnimFrame = (function() {
-        return window.requestAnimationFrame    ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame    ||
-            window.oRequestAnimationFrame      ||
-            window.msRequestAnimationFrame     ||
-            function(callback){
-                window.setTimeout(callback, 1000 / 60);
-            };
-    })();
-
     // Install logic
     // If the app has already been installed, we don't do anything.
     // Otherwise we'll show the button, and hide it when/if the user installs the app.
@@ -148,6 +135,8 @@ window.onload = function() {
             return;
         }
 
+        requestAnimationFrame(main);
+
         var now = Date.now();
         var dt = (now - then) / 1000.0;
 
@@ -155,7 +144,7 @@ window.onload = function() {
         render();
 
         then = now;
-        requestAnimFrame(main);
+
     }
 
 
