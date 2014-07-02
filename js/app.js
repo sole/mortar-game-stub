@@ -52,8 +52,8 @@ window.onload = function() {
 
     // Create the canvas
     var mainContainer = document.querySelector('main');
-    var canvas = document.createElement("canvas");
-    var ctx = canvas.getContext("2d");
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
     canvas.width = 320;
     canvas.height = 240;
     mainContainer.appendChild(canvas);
