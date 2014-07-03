@@ -41,8 +41,9 @@ window.onload = function() {
     var mainContainer = document.querySelector('main');
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
-    canvas.width = 320;
-    canvas.height = 240;
+	var dpr = window.devicePixelRatio;
+
+	setCanvasSize(320, 240);
     mainContainer.appendChild(canvas);
 
     // The player's state
@@ -70,6 +71,17 @@ window.onload = function() {
 
 
     // Functions ---
+	
+
+	// Set canvas width and height attributes and CSS style so it looks
+	// crispy and beautiful in higher density displays
+	function setCanvasSize(width, height) {
+		canvas.width = width * dpr;
+		canvas.height = height * dpr;
+
+		canvas.style.width = Math.round(canvas.width / dpr) + 'px';
+		canvas.style.height = Math.round(canvas.height / dpr) + 'px';
+	}
 
 
     // Reset game to original state
@@ -94,8 +106,10 @@ window.onload = function() {
     // If you look at the bottom of index.html, we load GameInput
     // from js/input.js right before app.js
     function update(dt) {
+
         // Speed in pixels per second
-        var playerSpeed = 100;
+		// We also take the pixel ratio into account!
+        var playerSpeed = 100 * dpr;
 
         if(GameInput.isDown('DOWN')) {
             // dt is the number of elapsed seconds, so multiplying by
@@ -126,7 +140,7 @@ window.onload = function() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.fillStyle = 'green';
-        ctx.fillRect(player.x, player.y, player.sizeX, player.sizeY);
+        ctx.fillRect(player.x, player.y, player.sizeX * dpr, player.sizeY * dpr);
     }
 
     // The main game loop
