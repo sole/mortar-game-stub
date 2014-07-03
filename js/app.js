@@ -98,7 +98,7 @@ window.onload = function() {
         var playerSpeed = 100;
 
         if(GameInput.isDown('DOWN')) {
-            // dt is the number of seconds passed, so multiplying by
+            // dt is the number of elapsed seconds, so multiplying by
             // the speed gives you the number of pixels to move
             player.y += playerSpeed * dt;
         }
@@ -130,14 +130,17 @@ window.onload = function() {
     }
 
     // The main game loop
-    function main() {
+	//
+    // Notice the `now` parameter. Every time a function is called as a result
+	// of requestAnimationFrame, the browser will also pass a parameter which is
+	// the current time since the document started being rendered.
+    function main(now) {
         if(!running) {
             return;
         }
 
         requestAnimationFrame(main);
 
-        var now = Date.now();
         var dt = (now - then) / 1000.0;
 
         update(dt);
